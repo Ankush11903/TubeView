@@ -21,22 +21,10 @@ function VideoInfo() {
 
   const callApi = async () => {
     console.log("calling api");
-    if(Selector === 'home') {
-      const response = await fetch(
-        "https://yt-api.p.rapidapi.com/home?geo=IN&count=100",
-        options
-      );
-      const data = await response.json();
-      // console.log("data");
-      // console.log(data.data?.filter(item => item.type === 'video'));
-      // const dataArray = Object.entries(data);
-      // setVideo(dataArray?.filter((item) => item.type === 'video'));
-      setVideo(data.data?.filter(item => item.type === 'video'));
-    }
-    else if(Selector === 'trending') {
+    if(Selector === 'trending') {
       // console.log("new")
         const response = await fetch(
-            "https://yt-api.p.rapidapi.com/?geo=IN&MUSIC&count=50",
+            "https://yt-api.p.rapidapi.com/trending?geo=IN&count=50",
             options
           );
           const data = await response.json();
@@ -81,7 +69,7 @@ function VideoInfo() {
   return (
     <div className="ml-56 mt-28">
       {console.log(video)}
-      <VideoComponent key={video.videoId} data={video} />
+      <VideoComponent key={video?.videoId} data={video} />
     </div>
   );
 }

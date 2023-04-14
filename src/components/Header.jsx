@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import hamburgerMenu from "../assets/hamburger-menu-5-512.png";
-// import youtubeLogo from "../assets/YouTube-Logo-PNG7.png";
+import youtubeLogo from "../assets/YouTube-Logo-PNG7.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setToggle, SetSide } from "../utils/SideSlice";
 import { Link } from "react-router-dom";
@@ -85,16 +85,16 @@ const Header = () => {
           <Link to="/">
             <img
             onClick={() => dispatch(setVideoState("home"))}
-              className="w-[7rem] pt-[0.18rem] ml-[1.45rem] cursor-pointer"
-              src="https://www.gstatic.com/youtube/img/promos/growth/280ff950fe065d3f65c3f61c2c768c137f0040acfb550a799a7ea46532c6db98_244x112.webp"
+              className="w-[6rem] pt-[0.18rem] ml-[1.45rem] cursor-pointer"
+              src={youtubeLogo}
               alt="youtube logo"
             />
           </Link>
         </div>
 
-        {/* <h6 className="font-medium text-neutral-600 text-[0.60rem] pt-[0.65rem] cursor-pointer pl-1">
+        <h6 className="font-medium text-neutral-600 text-[0.60rem] pt-[0.65rem] cursor-pointer pl-1">
           IN
-        </h6> */}
+        </h6>
       </div>
       <div className="flex pt-2 col-span-8">
         {showSearch && (
@@ -122,7 +122,7 @@ const Header = () => {
         <input
          onKeyDown={handleKeyDown}
           className="h-8 border  border-gray-300 shadow-sm  w-[27rem]
-  rounded-l-full  focus:outline outline-blue-600  pl-3  placeholder-[#898989] text-sm font-sans font-normal"
+  rounded-l-full  focus:outline outline-blue-600  pl-3 z-50 placeholder-[#898989] text-sm font-sans font-normal"
           type="text"
           placeholder="Search"
           value={value}
