@@ -9,6 +9,7 @@ export default function VideoPlayer() {
   const videoId = searchParams.get("v");
   const dispatch = useDispatch();
   const isSideBarShown = useSelector((state) => state.side.isSideBarShown);
+  // console.log("isSideBarShown")
 
   useEffect(() => {
     dispatch(SetSide(false));
@@ -27,7 +28,7 @@ export default function VideoPlayer() {
         src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
     </div>
   );

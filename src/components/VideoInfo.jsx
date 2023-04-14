@@ -3,9 +3,14 @@ import { useEffect, useState } from "react";
 import VideoComponent from "./VideoComponent";
 import { useSelector } from "react-redux";
 // import { Link } from 'react-router-dom';
+import Shimmer from "./Shimmer";
 
 
 function VideoInfo() {
+  // adding shimmer effect when fetching from api
+  const [loading, setLoading] = useState(false);
+
+
   const [video, setVideo] = useState([]);
   const Selector = useSelector((state) => state?.video.video);
   console.log("selector")
@@ -20,6 +25,7 @@ function VideoInfo() {
   
 
   const callApi = async () => {
+    setLoading(true);
     console.log("calling api");
     if(Selector === 'trending') {
       // console.log("new")
@@ -55,13 +61,14 @@ function VideoInfo() {
 
     
 
-
+    setLoading(false);
     // setVideo(data?.filter((item) => item.type === 'video'));
     // setVideo((prev) => [...prev, ...data[50]?.data]);
     // console.log(data);
   };
 
   useEffect(() => {
+    
     callApi();
     
   }, [Selector]);
@@ -69,7 +76,11 @@ function VideoInfo() {
   return (
     <div className="ml-56 mt-28">
       {console.log(video)}
-      <VideoComponent key={video?.videoId} data={video} />
+      {
+        loading ? <Shimmer /> : <VideoComponent key={video?.videoId} data={video} />
+      }
+      {/* <VideoComponent key={video?.videoId} data={video} />
+      <Shimmer /> */}
     </div>
   );
 }
