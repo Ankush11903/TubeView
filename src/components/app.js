@@ -9,7 +9,7 @@ import store from "../utils/Store";
 
 // import Footer from "./footer";
 import VideoContainer from "./videoContainer";
-import VideoPlayer from "./videoPlayer";
+import VideoPlayer from "./VideoPlayer";
 import Body from "./body";
 import Header from "./Header";
 
