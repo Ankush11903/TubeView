@@ -23,6 +23,10 @@ export const YoutubeApi = createApi({
         query: (id) => 'https://yt-api.p.rapidapi.com/comments?id='+id+'&count=50'
         ,
     }),
+    getRelatedVideos: builder.query({
+        query: (id) => 'related?id='+id+'&count=50'
+        ,
+    }),
   }),
 });
-export const { useGetTrendingVideosQuery,useGetSearchVideosQuery,useGetCommentsQuery } = YoutubeApi;
+export const { useGetTrendingVideosQuery,useGetSearchVideosQuery,useGetCommentsQuery,useGetRelatedVideosQuery } = YoutubeApi;

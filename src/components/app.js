@@ -12,6 +12,7 @@ import VideoContainer from "./videoContainer";
 import VideoPlayer from "./VideoPlayer";
 import Body from "./body";
 import Header from "./Header";
+import SearchPlayer from "./SearchPlayer";
 
 
 
@@ -71,6 +72,10 @@ const Router = createBrowserRouter([
       {
         path: "/watch",
         element: <VideoPlayer  />,
+      },
+      {
+        path: "/results",
+        element: <SearchPlayer  />,
       },
     ],
   },
