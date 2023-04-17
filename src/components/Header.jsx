@@ -57,8 +57,10 @@ const Header = () => {
   const handleKeyDown = (e) => {
     console.log("entered")
     if (e.key === "Enter") {
-     <Link to={"/results?search_query="+value}> dispatch(setVideoState(value));
-      setValue("");</Link>
+      dispatch(setVideoState(value));
+      setValue("");
+      e.preventDefault(); // prevent page reload
+      window.location.href = `/search?query=${value}`;
     }
   };
 
