@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { SetSearch } from "../utils/SearchSlice";
 import { setVideoState } from "../utils/VideoSlice";
 
-// import microphone from "../assets/microphone-line-icon.png";
+
 
 const Header = () => {
   const [value, setValue] = useState("");
