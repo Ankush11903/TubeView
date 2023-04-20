@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import youtubeLogo from "../assets/YouTube-Logo-PNG7.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setToggle, SetSide } from "../utils/SideSlice";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { SetSearch } from "../utils/SearchSlice";
 import { setVideoState } from "../utils/VideoSlice";
 
@@ -13,6 +13,7 @@ const Header = () => {
   const [value, setValue] = useState("");
   const [searchValue, setSearchValue] = useState([]);
   const [showSearch, setShowSearch] = useState(false);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -59,8 +60,7 @@ const Header = () => {
     if (e.key === "Enter") {
       dispatch(setVideoState(value));
       setValue("");
-      e.preventDefault(); // prevent page reload
-      window.location.href = `/search?query=${value}`;
+      navigate(`/results?search_query=${value}`)
     }
   };
 
