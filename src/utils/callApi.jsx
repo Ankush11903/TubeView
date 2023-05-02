@@ -27,6 +27,10 @@ export const YoutubeApi = createApi({
         query: (id) => 'related?id='+id+'&count=50'
         ,
     }),
+    getVideoInfo: builder.query({
+      query: (id) => 'video/info?id='+id
+      ,
+  }),
   }),
 });
-export const { useGetTrendingVideosQuery,useGetSearchVideosQuery,useGetCommentsQuery,useGetRelatedVideosQuery } = YoutubeApi;
+export const { useGetTrendingVideosQuery,useGetSearchVideosQuery,useGetCommentsQuery,useGetRelatedVideosQuery,useGetVideoInfoQuery } = YoutubeApi;

@@ -6,9 +6,11 @@ import { useSelector } from "react-redux";
 import {
   useGetCommentsQuery,
   useGetRelatedVideosQuery,
+  useGetVideoInfoQuery
 } from "../utils/callApi.jsx";
 import { BiLike,BiDislike } from "react-icons/Bi";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function VideoPlayer() {
   const [searchParams] = useSearchParams();
@@ -17,11 +19,24 @@ export default function VideoPlayer() {
   const isSideBarShown = useSelector((state) => state?.side?.isSideBarShown);
 
   const { data, error, isLoading } = useGetCommentsQuery(searchParams.get("v"));
+  const result=useGetVideoInfoQuery(searchParams.get("v"));
+  console.log("result");
+  console.log(result);
   const getRelatedVideos = useGetRelatedVideosQuery(searchParams.get("v"));
-  console.log("getRelatedVideos");
-  console.log(getRelatedVideos);
-  console.log("data");
-  console.log(data);
+  // console.log("getRelatedVideos");
+  // console.log(getRelatedVideos);
+  // console.log("data");
+  // console.log(data);
+
+  const [hoveredItems, setHoveredItems] = useState({});
+
+  const handleMouseEnter = (videoId) => {
+    setHoveredItems((prev) => ({ ...prev, [videoId]: true }));
+  };
+
+  const handleMouseLeave = (videoId) => {
+    setHoveredItems((prev) => ({ ...prev, [videoId]: false }));
+  };
 
   useEffect(() => {
     console.log("isSideBarShown");
@@ -93,12 +108,18 @@ export default function VideoPlayer() {
         <h1 className="text-2xl font-bold">Related Videos</h1>
         {getRelatedVideos?.data?.data?.map((item) => (
           <Link to={"/watch?v="+item.videoId} ><div key={item?.id}>
-            <div className="flex items-center mt-2">
-              <img
-                className="w-[9rem] h-20 rounded-lg"
-                src={item?.thumbnail[1]?.url}
-                alt=""
-              />
+            <div className="flex items-center mt-2" onMouseEnter={() => handleMouseEnter(item.videoId)}
+          onMouseLeave={() => handleMouseLeave(item.videoId)}>
+            <img
+              className="w-56 rounded-lg"
+              src={
+                hoveredItems[item.videoId]
+                  ? item?.richThumbnail ? item?.richThumbnail[0]?.url : item?.thumbnail && item?.thumbnail[0]?.url
+                  : Object.keys(item?.thumbnail || {}).length > 1 ? item?.thumbnail[1]?.url : item?.thumbnail && item?.thumbnail[0]?.url
+
+              }
+              alt="title"
+            />
               <div className="ml-4 w-52">
                 <h1
                   className="font-semibold text-xs"

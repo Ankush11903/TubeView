@@ -4,7 +4,6 @@ import youtubeLogo from "../assets/YouTube-Logo-PNG7.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setToggle, SetSide } from "../utils/SideSlice";
 import { Link , useNavigate} from "react-router-dom";
-import { SetSearch } from "../utils/SearchSlice";
 import { setVideoState } from "../utils/VideoSlice";
 
 
@@ -32,15 +31,15 @@ const Header = () => {
       if (false) {
         // setSearchValue(setSearch?.value[value]);
       } else {
-        const response = await fetch(
-          "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=" +
-            value
-        );
-        const data = await response.json();
-        dispatch(SetSearch({ [value]: data[1] }));
+        // const response = await fetch(
+        //   "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=" +
+        //     value
+        // );
+        // const data = await response.json();
+        // dispatch(SetSearch({ [value]: data[1] }));
 
-        // dispatch(SetSearch({[value]:[data[1]]}))
-        setSearchValue(data[1]);
+        // // dispatch(SetSearch({[value]:[data[1]]}))
+        // setSearchValue(data[1]);
       }
     }, 200);
     return () => {
@@ -53,6 +52,7 @@ const Header = () => {
     setValue(valu);
     setShowSearch(false);
     dispatch(setVideoState(valu));
+    navigate(`/`)
   };
 
   const handleKeyDown = (e) => {

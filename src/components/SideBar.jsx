@@ -2,11 +2,13 @@ import React ,{useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { setVideoState } from "../utils/VideoSlice";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const SideBar = () => {
   const isSideBarShown = useSelector((state) => state?.side?.isSideBarShown);
   const dispatch = useDispatch();
-  const [hoverItem, setHoverItem] = useState("home");
+  const [hoverItem, setHoverItem] = useState("trending");
+  const navigate=useNavigate();
 
 
   return (
@@ -15,7 +17,7 @@ const SideBar = () => {
         className={`fixed  top-[56px] bg-white flex flex-col w-56 overflow-hidden  h-[88vh] mt-3   scrollbar-thin scrollbar-thumb-[#383131] scrollbar-track-[#66646144] hover:overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full  transition duration-500 ease-in-out transition-delay-500 scrollbar-thumb`}
       >
           <div className={`flex w-48 ml-2  rounded-xl   hover:bg-[#f2f1f1] ${hoverItem==="home"?'bg-[#efeeec] border rounded-xl':'bg-white'} cursor-pointer`}
-          onClick={()=> dispatch(setVideoState("Home"),setHoverItem("home"))} >
+          onClick={()=> dispatch(setVideoState("Home"),setHoverItem("home"),navigate('/'))} >
             <svg
               className="ml-4 w-5"
               viewBox="0 0 24 24"
@@ -32,7 +34,7 @@ const SideBar = () => {
           </div>
         <div
           className={`cursor-pointer flex w-48 ml-2   hover:bg-[#f2f1f1] ${hoverItem==="shorts"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("Shorts"),setHoverItem("shorts"))}
+          onClick={() => dispatch(setVideoState("Shorts"),setHoverItem("shorts"),navigate('/'))}
         >
           {/* <svg c viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g ><path d="M11,7l6,3.5L11,14V7L11,7z M18,20H4V6H3v15h15V20z M21,18H6V3h15V18z M7,17h13V4H7V17z" ></path></g></svg> */}
           <svg
@@ -50,7 +52,7 @@ const SideBar = () => {
         </div>
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="trending"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("trending"),setHoverItem("trending"))}
+          onClick={() => dispatch(setVideoState("trending"),setHoverItem("trending"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -68,7 +70,7 @@ const SideBar = () => {
 
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="shopping"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("shopping"),setHoverItem("shopping"))}
+          onClick={() => dispatch(setVideoState("shopping"),setHoverItem("shopping"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -85,7 +87,7 @@ const SideBar = () => {
 
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="Music"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("Music"),setHoverItem("Music"))}
+          onClick={() => dispatch(setVideoState("Music"),setHoverItem("Music"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -105,7 +107,7 @@ const SideBar = () => {
 
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="movies & music"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("movies & music"),setHoverItem("movies & music"))}
+          onClick={() => dispatch(setVideoState("movies & music"),setHoverItem("movies & music"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -127,7 +129,7 @@ const SideBar = () => {
 
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="live"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("live"),setHoverItem("live"))}
+          onClick={() => dispatch(setVideoState("live"),setHoverItem("live"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -144,7 +146,7 @@ const SideBar = () => {
 
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="gaming"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("gaming"),setHoverItem("gaming"))}
+          onClick={() => dispatch(setVideoState("gaming"),setHoverItem("gaming"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -164,7 +166,7 @@ const SideBar = () => {
 
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="news"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("news"),setHoverItem("news"))}
+          onClick={() => dispatch(setVideoState("news"),setHoverItem("news"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -184,7 +186,7 @@ const SideBar = () => {
 
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="sports"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("sports"),setHoverItem("sports"))}
+          onClick={() => dispatch(setVideoState("sports"),setHoverItem("sports"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -204,7 +206,7 @@ const SideBar = () => {
 
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="learning"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("learning"),setHoverItem("learning"))}
+          onClick={() => dispatch(setVideoState("learning"),setHoverItem("learning"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -224,7 +226,7 @@ const SideBar = () => {
 
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="fashion & beauty"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("fashion & beauty"),setHoverItem("fashion & beauty"))}
+          onClick={() => dispatch(setVideoState("fashion & beauty"),setHoverItem("fashion & beauty"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -251,7 +253,7 @@ const SideBar = () => {
 
         <div
          className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="youtube premium"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-         onClick={() => dispatch(setVideoState("youtube premium"),setHoverItem("youtube premium"))}
+         onClick={() => dispatch(setVideoState("youtube premium"),setHoverItem("youtube premium"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -343,7 +345,7 @@ const SideBar = () => {
         </div>
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="youtube studio"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("youtube studio"),setHoverItem("youtube studio"))}
+          onClick={() => dispatch(setVideoState("youtube studio"),setHoverItem("youtube studio"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -381,7 +383,7 @@ const SideBar = () => {
 
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="youtube music"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("youtube music"),setHoverItem("youtube music"))}
+          onClick={() => dispatch(setVideoState("youtube music"),setHoverItem("youtube music"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
@@ -414,7 +416,7 @@ const SideBar = () => {
 
         <div
           className={`cursor-pointer flex w-48 ml-2 rounded-xl  hover:bg-[#f2f1f1] ${hoverItem==="youtube kids"?'bg-[#efeeec] border rounded-xl':'bg-white'}`}
-          onClick={() => dispatch(setVideoState("youtube kids"),setHoverItem("youtube kids"))}
+          onClick={() => dispatch(setVideoState("youtube kids"),setHoverItem("youtube kids"),navigate('/'))}
         >
           <svg
             className="ml-4 w-5"
