@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import hamburgerMenu from "../assets/hamburger-menu-5-512.png";
 import youtubeLogo from "../assets/YouTube-Logo-PNG7.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setToggle, SetSide } from "../utils/SideSlice";
