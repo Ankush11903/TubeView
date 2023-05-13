@@ -13,6 +13,9 @@ import VideoPlayer from "./VideoPlayer";
 import Body from "./body";
 import Header from "./Header";
 import SearchPlayer from "./SearchPlayer";
+import { inject } from '@vercel/analytics';
+ 
+inject();
 
 
 
@@ -87,6 +90,8 @@ const Router = createBrowserRouter([
 function App() {
   return (
     <Provider store={store}>
+      {/* <Component {...pageProps} />
+      <Analytics /> */}
       <Header  />
       <Body  />
       
