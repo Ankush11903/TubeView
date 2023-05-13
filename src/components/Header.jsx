@@ -84,14 +84,18 @@ const Header = () => {
 
         <div>
           <Link to="/">
-            <img
+            <div className="flex">
+              <img
             onClick={() => dispatch(setVideoState("home"))}
-              className="w-[6rem] pt-[0.18rem] ml-[1.45rem] cursor-pointer"
-              src={youtubeLogo}
+              className="w-[2.7rem] pt-[0.78rem] ml-[1.45rem] cursor-pointer"
+              src="https://www.logo.wine/a/logo/YouTube/YouTube-Icon-Full-Color-Logo.wine.svg"
               alt="youtube logo"
             />
-          </Link>
-        </div>
+            <h1 className="pt-[0.78rem] font-extrabold text-lg -ml-1">TubeView</h1>
+            </div>
+            
+          </Link></div>
+        
 
         <h6 className="font-medium text-neutral-600 text-[0.60rem] pt-[0.65rem] cursor-pointer pl-1">
           IN
