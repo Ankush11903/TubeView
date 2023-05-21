@@ -10,7 +10,9 @@ import {
 function VideoInfo() {
   const [video, setVideo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const isSideBarShown= useSelector((state) => state?.side?.isSideBarShown);
   const Selector = useSelector((state) => state?.video.video);
+
   const { data,  isError } =
     Selector === "trending"
       ? useGetTrendingVideosQuery()
@@ -30,7 +32,7 @@ function VideoInfo() {
   console.log(isLoading);
 
   return (
-    <div className="ml-56 mt-28">
+    <div className={`ml-${isSideBarShown ?'56':'5 '} mt-28 `}>
       {isLoading ? (
         <Shimmer />
       ) : (

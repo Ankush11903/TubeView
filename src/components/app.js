@@ -15,51 +15,6 @@ import Header from "./Header";
 import SearchPlayer from "./SearchPlayer";
 
 
-
-
-
-
-// import '../utils/index.css';
-
-
-
-
-
-// const App = () => {
-//   return (
-//     <Provider store={store} >
-//       <Header />
-//       <Outlet />
-//       {/* <Footer /> */}
-//     </Provider>
-//   );
-// };
-
-// const appRouter= createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App />,
-//     children: [
-//       {
-//         path: "/",
-//         element: <VideoContainer  />,
-//       },
-//       {
-//         path: "/watch",
-//         element: <VideoPlayer  />,
-//       },
-//     ],
-
-//   }
-// ])
-
-
-
-
-
-
-
-
 const Router = createBrowserRouter([
   {
     path: "/",

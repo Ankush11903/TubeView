@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+// import hamburgerMenu from "../assets/hamburger-menu-5-512.png";
 import youtubeLogo from "../assets/YouTube-Logo-PNG7.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setToggle, SetSide } from "../utils/SideSlice";
@@ -84,18 +85,14 @@ const Header = () => {
 
         <div>
           <Link to="/">
-            <div className="flex">
-              <img
+            <img
             onClick={() => dispatch(setVideoState("home"))}
-              className="w-[2.7rem] pt-[0.78rem] ml-[1.45rem] cursor-pointer"
-              src="https://www.logo.wine/a/logo/YouTube/YouTube-Icon-Full-Color-Logo.wine.svg"
+              className="w-[6rem] pt-[0.18rem] ml-[1.45rem] cursor-pointer"
+              src={youtubeLogo}
               alt="youtube logo"
             />
-            <h1 className="pt-[0.78rem] font-extrabold text-lg -ml-1">TubeView</h1>
-            </div>
-            
-          </Link></div>
-        
+          </Link>
+        </div>
 
         <h6 className="font-medium text-neutral-600 text-[0.60rem] pt-[0.65rem] cursor-pointer pl-1">
           IN
