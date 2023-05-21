@@ -32,7 +32,7 @@ function VideoInfo() {
   console.log(isLoading);
 
   return (
-    <div className={`${isSideBarShown ?'ml-52':'ml-5 '} mt-28 `}>
+    <div className={`${isSideBarShown ?'ml-56':'ml-5 '} mt-28 `}>
       {isFetching ? (
         <Shimmer />
       ) : (
