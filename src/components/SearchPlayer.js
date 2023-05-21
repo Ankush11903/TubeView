@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetSearchVideosQuery } from "../utils/callApi.jsx";
 import { Link } from "react-router-dom";
+import SearchShimmer from "./SearchShimmer.jsx";
 
 export default function SearchPlayer() {
   const [hoveredItems, setHoveredItems] = useState({});
@@ -17,12 +18,14 @@ export default function SearchPlayer() {
   // const search = useSelector(selectSearch)
   const [searchParams] = useSearchParams();
   const search = searchParams.get("search_query");
-  const { data, loading, error } = useGetSearchVideosQuery(search);
+  const { data, loading, error,isFetching } = useGetSearchVideosQuery(search);
   // const [video,setVideo]=React.useState([]);
   // setVideo(data);
   console.log(data);
+  
 
   return (
+    isFetching ? <SearchShimmer /> :
     <div className="ml-64 pt-16">
       {/* <h1 className="text-2xl font-bold">Related Videos</h1> */}
       {data?.data?.map((item) => (
@@ -106,12 +109,8 @@ export default function SearchPlayer() {
 
 
         <Link to={item.channelTitle} onClick={()=>console.log("ChannelTitle")}>
-          {/* <div
-            key={item?.id}
-            onMouseEnter={() => handleMouseEnter(item.videoId)}
-            onMouseLeave={() => handleMouseLeave(item.videoId)}
-          > */}
-            <div className="flex items-center mt-2">
+          
+            <div className="flex items-center">
               <img
                 className="w-96 mx-16 rounded-lg"
                 src={Object.keys(item?.thumbnail || {}).length > 1 ? item?.thumbnail[1]?.url

@@ -13,7 +13,7 @@ function VideoInfo() {
   const isSideBarShown= useSelector((state) => state?.side?.isSideBarShown);
   const Selector = useSelector((state) => state?.video.video);
 
-  const { data,  isError } =
+  const { data,  isError ,isFetching} =
     Selector === "trending"
       ? useGetTrendingVideosQuery()
       : useGetSearchVideosQuery(Selector);
@@ -32,8 +32,8 @@ function VideoInfo() {
   console.log(isLoading);
 
   return (
-    <div className={`ml-${isSideBarShown ?'56':'5 '} mt-28 `}>
-      {isLoading ? (
+    <div className={`${isSideBarShown ?'ml-52':'ml-5 '} mt-28 `}>
+      {isFetching ? (
         <Shimmer />
       ) : (
         <VideoComponent key={video?.videoId} data={video} />
