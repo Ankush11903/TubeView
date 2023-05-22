@@ -190,7 +190,7 @@ const Header = () => {
         </svg>
         <img
           className="w-8 h-8 rounded-full cursor-pointer mt-3"
-          src="https://yt3.ggpht.com/ytc/AL5GRJU7DbYpvpSUKwkz4A4--kczqJiF1vucvBzBroyLcDyUR1WGcKSGvaDjynRljlcx=s88-c-k-c0x00ffffff-no-rj-mo"
+          src="https://yt3.ggpht.com/ytc/AGIKgqOpL8_k8PB8B8iWyCnF4DFIFZJa6_4lyClNdukjATCtGW1b5Kcsm2Jb5VRGZ1rr=s88-c-k-c0x00ffffff-no-rj-mo"
           alt="User"
         />
       </div>
