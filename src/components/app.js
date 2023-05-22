@@ -1,14 +1,16 @@
-import React from "react";
+import React,{Suspense,lazy} from "react";
 import ReactDOM from "react-dom/client";
 
 import {createBrowserRouter,RouterProvider,Outlet} from 'react-router-dom';
+import Shimmer from "./Shimmer";
 
 
 import { Provider } from "react-redux";
 import store from "../utils/Store";
 
 // import Footer from "./footer";
-import VideoContainer from "./videoContainer";
+// import VideoContainer from "./videoContainer";
+const VideoContainer=lazy(()=>import("./videoContainer"))
 import VideoPlayer from "./VideoPlayer";
 import Body from "./body";
 import Header from "./Header";
@@ -22,7 +24,7 @@ const Router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <VideoContainer  />,
+        element: <Suspense fallback={Shimmer} ><VideoContainer  /></Suspense>,
       },
       {
         path: "/watch",
