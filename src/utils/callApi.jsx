@@ -15,6 +15,10 @@ export const YoutubeApi = createApi({
         query: () => 'trending?geo=IN&count=50'
         ,
     }),
+    getHomeVideos: builder.query({
+      query: () => 'home?geo=IN&count=50'
+      ,
+  }),
     getSearchVideos: builder.query({
         query: (selector) => 'search?query='+selector+'&geo=IN&count=50'
         ,
@@ -33,4 +37,4 @@ export const YoutubeApi = createApi({
   }),
   }),
 });
-export const { useGetTrendingVideosQuery,useGetSearchVideosQuery,useGetCommentsQuery,useGetRelatedVideosQuery,useGetVideoInfoQuery } = YoutubeApi;
+export const { useGetTrendingVideosQuery,useGetHomeVideosQuery ,useGetSearchVideosQuery,useGetCommentsQuery,useGetRelatedVideosQuery,useGetVideoInfoQuery } = YoutubeApi;

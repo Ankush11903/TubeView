@@ -5,6 +5,7 @@ import Shimmer from "./Shimmer";
 import {
   useGetSearchVideosQuery,
   useGetTrendingVideosQuery,
+  useGetHomeVideosQuery
 } from "../utils/callApi";
 
 function VideoInfo() {
@@ -16,12 +17,14 @@ function VideoInfo() {
   const { data,  isError ,isFetching} =
     Selector === "trending"
       ? useGetTrendingVideosQuery()
-      : useGetSearchVideosQuery(Selector);
+      : Selector === "home"?useGetHomeVideosQuery(): useGetSearchVideosQuery(Selector);
 
   useEffect(() => {
     const fetchVideoData = async () => {
       setIsLoading(true);
       const videoData = await data;
+      console.log("video")
+      console.log(videoData);
       setVideo(videoData?.data?.filter((item) => item?.type === "video"));
       setIsLoading(false);
     };
