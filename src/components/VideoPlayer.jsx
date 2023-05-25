@@ -11,7 +11,7 @@ import {
 import { BiLike, BiDislike } from "react-icons/Bi";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { liveData } from "../utils/ChatSlice";
+import LiveChat from "./LiveChat";
 
 export default function VideoPlayer() {
   const [searchParams] = useSearchParams();
@@ -39,6 +39,7 @@ export default function VideoPlayer() {
   const handleMouseLeave = (videoId) => {
     setHoveredItems((prev) => ({ ...prev, [videoId]: false }));
   };
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     console.log("isSideBarShown");
@@ -118,47 +119,10 @@ export default function VideoPlayer() {
           )}
         </div>
       </div>
-      <div className="w-full h-96 p-2">
-        <div className="w-full h-full  rounded-lg border border-black">
-        <div className="w-full h-10   p-2 font-medium text-base">
-          Live Chat
-        </div>
-        <div className="border boder-black h-72">
-          <h1 className="text-2xl font-bold mt-4">{
-          console.log("result")}
-          {console.log(liveChat)}</h1>
-        </div>
-        <div>
-          <div>
-            <div className="flex items-center mt-2">
-            <img
-          className="w-6 ml-3 h-6 rounded-full cursor-pointer"
-          src="https://yt3.ggpht.com/ytc/AGIKgqOpL8_k8PB8B8iWyCnF4DFIFZJa6_4lyClNdukjATCtGW1b5Kcsm2Jb5VRGZ1rr=s88-c-k-c0x00ffffff-no-rj-mo"
-          alt="User"
-        />
-        <span className="font-semibold text-xs">Ankush Kumar</span>
-        <form className="flex" onSubmit={(e)=>{
-          e.preventDefault();
-          dispatch(liveChat({name:"ankush",message:"1234"}));
-          e.target[0].value="";
+      <div className="w-full h-96 p-2 ">
+        <LiveChat />
+       
 
-        }}>
-        <input
-          className="w-48 h-7 ml-4 rounded-md border border-gray-400 font-light text-black text-xs pl-2"
-          type="text"
-          placeholder="Chat publicly as ankush kumar..."
-          
-        />
-        <button className="mx-1 bg-green-100 rounded-lg text-sm font-semibold text-gray-500">Send</button>
-
-
-        </form>
-</div>
-
-          </div>
-        </div>
-        </div>
-        
         <div className="ml-4">
           <h1 className="text-2xl font-bold">Related Videos</h1>
           {getRelatedVideos?.data?.data?.map((item) => (

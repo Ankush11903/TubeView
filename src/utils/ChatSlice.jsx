@@ -6,7 +6,10 @@ const ChatSlice = createSlice({
     },
     reducers: {
         liveData: (state, action) => {
-            state.Data.push(action.payload);
+            if (state.Data.length > 270) {
+                state.Data.pop();
+              }
+            state.Data.unshift(action.payload);
         }
     }
 });
