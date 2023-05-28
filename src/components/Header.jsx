@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToggle, SetSide } from "../utils/SideSlice";
 import { Link , useNavigate} from "react-router-dom";
 import { setVideoState } from "../utils/VideoSlice";
+// import { SetSearch } from "../utils/SearchSlice";
 
 
 
@@ -18,8 +19,9 @@ const Header = () => {
   useEffect(() => {
     dispatch(SetSide(true));
   }, []);
-  const setSearch = useSelector((state) => state.search);
-  // console.log(setSearch);
+  const Search = useSelector((state) => state.search);
+  console.log("search");
+  console.log(Search);
 
   useEffect(() => {
     // i want to fetch an api after 200ms of user typing
@@ -27,20 +29,18 @@ const Header = () => {
     // i want to fetch the api only if user has stopped typing for 200ms
 
     const timer = setTimeout(async () => {
-      console.log(setSearch?.value);
-      if (false) {
-        // setSearchValue(setSearch?.value[value]);
-      } else {
-        // const response = await fetch(
-        //   "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=" +
-        //     value
-        // );
-        // const data = await response.json();
+      console.log(Search?.value);
+      
+        const response = await fetch(
+          "https://tubeview.onrender.com/search?value=" +
+            value
+        );
+        const data = await response.json();
         // dispatch(SetSearch({ [value]: data[1] }));
 
-        // // dispatch(SetSearch({[value]:[data[1]]}))
-        // setSearchValue(data[1]);
-      }
+        // dispatch(SetSearch({[value]:[data[1]]}))
+        setSearchValue(data[1]);
+      
     }, 200);
     return () => {
       clearTimeout(timer);
