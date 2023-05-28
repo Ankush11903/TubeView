@@ -58,7 +58,7 @@ export default function LiveChat() {
     };
     const i = setInterval(() => {
       chatApi();
-    }, 5000);
+    }, 1000);
 
     return () => {
       clearInterval(i);
