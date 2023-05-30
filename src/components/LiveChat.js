@@ -21,8 +21,8 @@ export default function LiveChat() {
         `https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails,snippet&id=${videoId}&key=AIzaSyAmg8F2nyyOqa5T4Yz-pJg5iQi6jQpYxuE&id=UCViPmftRQIxoaVmlAfPTgdQ`
       );
       const data = await res.json();
-      console.log("data");
-      console.log(data);
+      // console.log("data");
+      // console.log(data);
       if (data?.items[0]?.liveStreamingDetails?.activeLiveChatId) {
         const chatRes = await fetch(
           `https://www.googleapis.com/youtube/v3/liveChat/messages?liveChatId=${data?.items[0]?.liveStreamingDetails?.activeLiveChatId}&part=snippet,authorDetails&key=AIzaSyAmg8F2nyyOqa5T4Yz-pJg5iQi6jQpYxuE&id=UCViPmftRQIxoaVmlAfPTgdQ`
@@ -40,12 +40,12 @@ export default function LiveChat() {
           );
         });
       } else {
-        console.log("no live chat");
+        // console.log("no live chat");
         
           const randomIndex = Math.floor(Math.random() * liveChatData.items.length);
           const randomItem = liveChatData.items[randomIndex];
-          console.log("randomItem")
-          console.log(randomItem)
+          // console.log("randomItem")
+          // console.log(randomItem)
           dispatch(
             liveData({
               image: randomItem?.authorDetails?.profileImageUrl,
@@ -67,9 +67,9 @@ export default function LiveChat() {
   return (
     <div className="w-full h-full  rounded-lg border border-black ">
       <div className="w-full h-10   p-2 font-medium text-base">Live Chat</div>
-      <div className="border boder-black h-72 overflow-y-scroll flex flex-col-reverse">
+      <div className="border boder-black h-72 overflow-y-scroll flex flex-col-reverse" >
         {liveChat?.map((item) => (
-          <div className="flex items-center rounded-md hover:bg-[#86878444]">
+          <div className="flex items-center rounded-md hover:bg-[#86878444]" key={item.id}>
           <div className="flex items-center py-[0.3rem] min-w-[10]">
             <img
               className="w-6 ml-3 h-6 rounded-full cursor-pointer"

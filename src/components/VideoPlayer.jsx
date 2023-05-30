@@ -12,6 +12,7 @@ import { BiLike, BiDislike } from "react-icons/Bi";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import LiveChat from "./LiveChat";
+import ChannelDetail from "./ChannelDetail";
 
 export default function VideoPlayer() {
   const [searchParams] = useSearchParams();
@@ -22,8 +23,8 @@ export default function VideoPlayer() {
 
   const { data, error, isLoading } = useGetCommentsQuery(searchParams.get("v"));
   const result = useGetVideoInfoQuery(searchParams.get("v"));
-  console.log("result");
-  console.log(result);
+  // console.log("result");
+  // console.log(result);
   const getRelatedVideos = useGetRelatedVideosQuery(searchParams.get("v"));
   // console.log("getRelatedVideos");
   // console.log(getRelatedVideos);
@@ -60,10 +61,11 @@ export default function VideoPlayer() {
           height="315"
           title="YouTube video player"
           src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-          frameborder="0"
+          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         ></iframe>
+        <ChannelDetail videoId={videoId}/>
 
         <div>
           <h1 className="text-base font-normal mt-4">
@@ -119,6 +121,7 @@ export default function VideoPlayer() {
           )}
         </div>
       </div>
+      
       <div className="w-full h-96 p-2 ">
         <LiveChat />
        

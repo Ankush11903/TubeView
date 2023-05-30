@@ -21,8 +21,8 @@ function Shimmer() {
                     <div className="ml-2">
                       <div className="animate-pulse w-40 h-3 bg-gray-200 rounded-sm"></div>
                    
-                      <p class="leading-relaxed mt-3 w-2/3 h-3 animate-pulse bg-gray-200 rounded-sm"></p>
-                      <p class="leading-relaxed mt-1 mb-2 w-full h-3 animate-pulse bg-gray-200 rounded-sm"></p>
+                      <p className="leading-relaxed mt-3 w-2/3 h-3 animate-pulse bg-gray-200 rounded-sm"></p>
+                      <p className="leading-relaxed mt-1 mb-2 w-full h-3 animate-pulse bg-gray-200 rounded-sm"></p>
 
                       
                     </div>
