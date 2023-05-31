@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { BiLike } from "react-icons/bi";
-import {BiDislike} from "react-icons/bi";
+import { BiDislike } from "react-icons/bi";
 import { RiShareForwardLine } from "react-icons/ri";
-import {TfiDownload} from "react-icons/tfi";
+import { TfiDownload } from "react-icons/tfi";
+import { AiTwotoneLike } from "react-icons/Ai";
+import { AiTwotoneDislike } from "react-icons/Ai";
+import VideoDescription from "./VideoDescription";
 
 export default function ChannelDetail({ videoId }) {
   const [data, setData] = useState(null);
   const [channelData, setChannelData] = useState(null);
+  const [like, setLike] = useState(false);
+  const [dislike, setDislike] = useState(false);
+  console.log("my name is ankush")
 
   useEffect(() => {
+    console.log("api cwalling")
     callApi();
-  }, []);
+  }, [videoId]);
 
   useEffect(() => {
     if (data) {
+      console.log("dcpadsvihdsaiuvhu09dhu9hdh")
       callApi2();
     }
   }, [data]);
@@ -44,7 +52,8 @@ export default function ChannelDetail({ videoId }) {
       console.error("Error:", error);
     }
   };
-  console.log(channelData);
+  console.log(data);
+  const description=data?.items?.[0]?.snippet?.description;
 
   return (
     <div className="flex  pt-2 flex-col">
@@ -104,55 +113,85 @@ export default function ChannelDetail({ videoId }) {
           </h1>
         </div>
 
-        <button className="bg-black text-white font-normal rounded-full ml-8 px-[0.87rem] py-[0.40rem]">Subscribe</button>
+        <button className="bg-black text-white font-normal rounded-full ml-8 px-[0.87rem] py-[0.40rem]">
+          Subscribe
+        </button>
 
-        <div className="flex bg-zinc-200 rounded-full p-2 ml-36">
-          <BiLike className="w-6 h-6 " />
-          <h1 className="px-3 items-center font-medium  border border-r-zinc-400 ">
+        <div className="flex bg-zinc-200 hover:bg-zinc-300 rounded-full p-2 ml-36">
+          {like === true ? (
+            <AiTwotoneLike
+              className="w-6 h-6 cursor-pointer"
+              onClick={() => {
+                setLike(false), setDislike(false);
+              }}
+            />
+          ) : (
+            <BiLike
+              className="w-6 h-6 cursor-pointer"
+              onClick={() => {
+                setLike(true), setDislike(false);
+              }}
+            />
+          )}
+
+          <h1
+            className="px-3 h-full items-center font-medium  border border-r-zinc-500 cursor-pointer"
+            onClick={() => {
+              like == true
+                ? setLike(false)
+                : (setLike(true), setDislike(false));
+            }}
+          >
             {/* {data?.items?.[0]?.statistics?.likeCount} */}
-            {data?.items?.[0]?.statistics?.likeCount >
-            1000000000000
+            {data?.items?.[0]?.statistics?.likeCount > 1000000000000
               ? (
-                  data?.items?.[0]?.statistics?.likeCount /
-                  1000000000000
+                  data?.items?.[0]?.statistics?.likeCount / 1000000000000
                 ).toFixed(1) + " T "
-              : data?.items?.[0]?.statistics?.likeCount >
-                1000000000
-              ? (
-                  data?.items?.[0]?.statistics?.likeCount /
-                  1000000000
-                ).toFixed(1) + " B "
+              : data?.items?.[0]?.statistics?.likeCount > 1000000000
+              ? (data?.items?.[0]?.statistics?.likeCount / 1000000000).toFixed(
+                  1
+                ) + " B "
               : data?.items?.[0]?.statistics?.likeCount >= 1000000
-              ? data?.items?.[0]?.statistics?.likeCount % 1000000 <
-                100000
-                ? (
-                    data?.items?.[0]?.statistics?.likeCount /
-                    1000000
-                  ).toFixed(0) + " M "
-                : (
-                    data?.items?.[0]?.statistics?.likeCount /
-                    1000000
-                  ).toFixed(1) + " M "
+              ? data?.items?.[0]?.statistics?.likeCount % 1000000 < 100000
+                ? (data?.items?.[0]?.statistics?.likeCount / 1000000).toFixed(
+                    0
+                  ) + " M "
+                : (data?.items?.[0]?.statistics?.likeCount / 1000000).toFixed(
+                    1
+                  ) + " M "
               : data?.items?.[0]?.statistics?.likeCount > 1000
-              ? (
-                  data?.items?.[0]?.statistics?.likeCount / 1000
-                ).toFixed(0) + " K "
+              ? (data?.items?.[0]?.statistics?.likeCount / 1000).toFixed(0) +
+                " K "
               : data?.items?.[0]?.statistics?.likeCount}
           </h1>
-          <BiDislike className=" w-6 h-6 ml-3" />
-
+          {dislike === true ? (
+            <AiTwotoneDislike
+              className="w-6 h-6 ml-3 cursor-pointer"
+              onClick={() => {
+                setDislike(false), setLike(false);
+              }}
+            />
+          ) : (
+            <BiDislike
+              className="w-6 h-6 ml-3 cursor-pointer"
+              onClick={() => {
+                setDislike(true), setLike(false);
+              }}
+            />
+          )}
+          {/* // <BiDislike className=" w-6 h-6 ml-3" /> */}
         </div>
 
-        <div className="flex bg-zinc-200 rounded-full p-2 ">
-          <RiShareForwardLine className="w-6 h-6 pr-2 " />
+        <div className="flex bg-zinc-200 rounded-full p-2 ml-2">
+          <RiShareForwardLine className="w-8 h-6 pr-2 " />
           Share
-          </div>
+        </div>
         <div className="flex bg-zinc-200 rounded-full p-2 ml-2 ">
           <TfiDownload className="w-6 h-6 pr-2" />
           Download
-          </div>
-
+        </div>
       </div>
+      <VideoDescription description={description} />
     </div>
   );
 }

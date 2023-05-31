@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { SetSide } from "../utils/SideSlice";
@@ -15,6 +15,7 @@ import LiveChat from "./LiveChat";
 import ChannelDetail from "./ChannelDetail";
 
 export default function VideoPlayer() {
+  
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("v");
   const dispatch = useDispatch();
@@ -23,13 +24,9 @@ export default function VideoPlayer() {
 
   const { data, error, isLoading } = useGetCommentsQuery(searchParams.get("v"));
   const result = useGetVideoInfoQuery(searchParams.get("v"));
-  // console.log("result");
-  // console.log(result);
+  
   const getRelatedVideos = useGetRelatedVideosQuery(searchParams.get("v"));
-  // console.log("getRelatedVideos");
-  // console.log(getRelatedVideos);
-  // console.log("data");
-  // console.log(data);
+
 
   const [hoveredItems, setHoveredItems] = useState({});
 
@@ -43,31 +40,30 @@ export default function VideoPlayer() {
   const [comment, setComment] = useState("");
 
   useEffect(() => {
-    console.log("isSideBarShown");
+   
     // getComments();
 
     dispatch(SetSide(false));
     return () => {
       dispatch(SetSide(true));
     };
-  }, []);
+  }, [videoId]);
 
-  return (
-    <div className={`${isSideBarShown ? "ml-60" : "ml-[4.2rem]"} mt-20 flex`}>
-      <div className="">
-        <iframe
-          className="w-[790px] h-[450px]"
-          width="560"
-          height="315"
-          title="YouTube video player"
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
-        <ChannelDetail videoId={videoId}/>
+  const memoizedChannelDetail = useMemo(() => (
+    <ChannelDetail videoId={videoId}/>
+  ), [videoId]);
 
-        <div>
+  const memoizedComments = useMemo(() => {
+    if (!videoId) {
+      return null;
+    }
+  
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+  
+    return (
+    <div>
           <h1 className="text-base font-normal mt-4">
             {data?.commentsCount} Comments
           </h1>
@@ -119,14 +115,21 @@ export default function VideoPlayer() {
               ))}
             </div>
           )}
-        </div>
-      </div>
-      
-      <div className="w-full h-96 p-2 ">
-        <LiveChat />
-       
+        </div> );
+}, [videoId, isLoading, data]);
 
-        <div className="ml-4">
+const memoizedRelatedVideos = useMemo(() => {
+  if (!videoId) {
+    return null;
+  }
+
+  if (getRelatedVideos.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="ml-4">
+      {console.log("getRelatedVideos")}
           <h1 className="text-2xl font-bold">Related Videos</h1>
           {getRelatedVideos?.data?.data?.map((item) => (
             <Link to={"/watch?v=" + item.videoId}>
@@ -187,7 +190,33 @@ export default function VideoPlayer() {
             </Link>
           ))}
         </div>
+  );
+}, [videoId, getRelatedVideos.isLoading, getRelatedVideos.data]);
+
+  return (
+    <div className={`${isSideBarShown ? "ml-60" : "ml-[4.2rem]"} mt-20 flex`}>
+      <div className="">
+        <iframe
+          className="w-[790px] h-[450px]"
+          width="560"
+          height="315"
+          title="YouTube video player"
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        ></iframe>
+         {videoId && memoizedChannelDetail}
+      {videoId && memoizedComments}
+      </div>
+      
+      <div className="w-full h-96 p-2 ">
+        <LiveChat />
+       
+
+        {videoId && memoizedRelatedVideos}
       </div>
     </div>
   );
 }
+
