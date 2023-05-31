@@ -49,9 +49,14 @@ export default function VideoPlayer() {
     };
   }, [videoId]);
 
-  const memoizedChannelDetail = useMemo(() => (
-    <ChannelDetail videoId={videoId}/>
-  ), [videoId]);
+  const memoizedChannelDetail = useMemo(() => {
+    if (!videoId) {
+      return null;
+    }
+    return (
+      <ChannelDetail videoId={videoId} />
+    );
+  }, [videoId]);
 
   const memoizedComments = useMemo(() => {
     if (!videoId) {

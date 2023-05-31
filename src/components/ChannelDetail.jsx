@@ -56,7 +56,7 @@ export default function ChannelDetail({ videoId }) {
   const description=data?.items?.[0]?.snippet?.description;
 
   return (
-    <div className="flex  pt-2 flex-col">
+    <div className="flex  pt-2 flex-col  w-[48rem] break-words">
       <div>
         <h1
           className="ml-1 items-center font-medium "
@@ -191,7 +191,7 @@ export default function ChannelDetail({ videoId }) {
           Download
         </div>
       </div>
-      <VideoDescription description={description} />
+      <VideoDescription description={description} views={data?.items?.[0]?.statistics?.viewCount} />
     </div>
   );
 }

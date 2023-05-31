@@ -23,7 +23,7 @@ export default function LiveChat() {
       const data = await res.json();
       // console.log("data");
       // console.log(data);
-      if (data?.items[0]?.liveStreamingDetails?.activeLiveChatId) {
+      if (data && data.items && data.items.length > 0 && data.items[0]?.liveStreamingDetails?.activeLiveChatId) {
         const chatRes = await fetch(
           `https://www.googleapis.com/youtube/v3/liveChat/messages?liveChatId=${data?.items[0]?.liveStreamingDetails?.activeLiveChatId}&part=snippet,authorDetails&key=AIzaSyAmg8F2nyyOqa5T4Yz-pJg5iQi6jQpYxuE&id=UCViPmftRQIxoaVmlAfPTgdQ`
         );
